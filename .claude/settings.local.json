@@ -39,7 +39,21 @@
       "Bash(mkdir:*)",
       "Bash(mv:*)",
       "Bash(git add:*)",
-      "Bash(git reset:*)"
+      "Bash(git reset:*)",
+      "Bash(../projects/singularity_cinema/step14_compose_video/tools/fix_video_duration_mismatch.sh)",
+      "Bash(./create_final_video_with_fixed_durations.sh:*)",
+      "Bash(./create_final_video_with_subtitles.sh:*)",
+      "Bash(./create_working_final_video.sh:*)",
+      "Bash(for i in {1..12})",
+      "Bash(do echo -n \"Segment $i: \")",
+      "Bash(md5:*)",
+      "Bash(done)",
+      "Bash(# 检查前几个片段的音频时长和文件大小\necho \"\"=== 音频文件分析 ===\"\"\nfor i in 1 2 3 4 5; do\n    echo -n \"\"Segment $i: \"\"\n    duration=$(ffprobe -v quiet -show_entries format=duration -of csv=p=0 audio/segment_$i.mp3)\n    size=$(ls -lh audio/segment_$i.mp3 | awk ''{print $5}'')\n    echo \"\"${duration}s, ${size}\"\"\ndone\n\necho \"\"\"\"\necho \"\"=== 检查音频前5秒内容 ===\"\"\n# 使用ffmpeg检查音频是否有实际语音内容\nfor i in 1 2 3; do\n    echo \"\"Segment $i - 检查音频波形...\"\"\n    ffmpeg -i audio/segment_$i.mp3 -t 5 -f null - 2>&1 | grep \"\"size=\"\" | tail -1\ndone)",
+      "Bash(# 对比改进效果\necho \"\"=== 重复次数对比分析 ===\"\"\necho \"\"\"\"\n\naudio_duration=$(ffprobe -v quiet -show_entries format=duration -of csv=p=0 audio/segment_3.mp3)\necho \"\"Segment 3 音频时长: ${audio_duration}秒\"\"\n\nold_video_duration=4.1\nnew_video_duration=12.1\n\nold_loops=$(echo \"\"scale=0; ($audio_duration / $old_video_duration) + 1\"\" | bc)\nnew_loops=$(echo \"\"scale=0; ($audio_duration / $new_video_duration) + 1\"\" | bc)\n\necho \"\"\"\"\necho \"\"🔄 4秒视频需要循环: ${old_loops} 次\"\"\necho \"\"🔄 12秒视频只需循环: ${new_loops} 次\"\" \necho \"\"\"\"\n\nimprovement=$(echo \"\"scale=1; (($old_loops - $new_loops) * 100) / $old_loops\"\" | bc)\necho \"\"📈 重复感减少: ${improvement}%\"\"\n\necho \"\"\"\"\necho \"\"💡 这意味着观众看到的重复内容从 ${old_loops} 次减少到 ${new_loops} 次！\"\")",
+      "Bash(# 分析每个片段的文本长度和音频时长的关系\necho \"\"=== 文本长度 vs 音频时长分析 ===\"\"\necho \"\"段落  字符数  音频时长  字符/秒\"\"\n\nfor i in {1..5}; do\n    # 从segments.txt提取内容并计算字符数\n    content=$(python3 -c \"\"\nimport json\nwith open(''segments.txt'', ''r'', encoding=''utf-8'') as f:\n    data = json.load(f)\n    for item in data:\n        if item[''index''] == $i:\n            print(item[''content''])\n            break\n\"\")\n    \n    char_count=${#content}\n    audio_duration=$(ffprobe -v quiet -show_entries format=duration -of csv=p=0 audio/segment_$i.mp3)\n    chars_per_sec=$(echo \"\"scale=1; $char_count / $audio_duration\"\" | bc)\n    \n    printf \"\"%3d  %6d  %8.1fs  %7.1f\\n\"\" $i $char_count $audio_duration $chars_per_sec\ndone)",
+      "Bash(rm:*)",
+      "Bash(for:*)",
+      "Bash(do echo -n \"$video: \")"
     ],
     "deny": []
   }

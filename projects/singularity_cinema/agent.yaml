@@ -89,7 +89,7 @@ video:
 
 use_doc_image: true
 
-use_subtitle: false
+use_subtitle: true
 
 use_text2video: false
 
