@@ -1,22 +1,22 @@
 llm:
   service: openai
-  model: claude-sonnet-4-5-20250929
-  openai_api_key:
-  openai_base_url: https://dashscope.aliyuncs.com/compatible-mode/v1
+  model: openai/gpt-5.1
+  openai_api_key: apikey-dd675b2a3fcb4f1aa88b91503d87f730
+  openai_base_url: https://api.atlascloud.ai/v1
 
 mllm:
   mllm_service: openai
-  mllm_model: claude-sonnet-4-5-20250929
-  mllm_openai_api_key:
-  mllm_openai_base_url: https://dashscope.aliyuncs.com/compatible-mode/v1
+  mllm_model: openai/gpt-5.1
+  mllm_openai_api_key: apikey-dd675b2a3fcb4f1aa88b91503d87f730
+  mllm_openai_base_url: https://api.atlascloud.ai/v1
 
 generation_config:
   temperature: 0.3
   top_k: 50
   max_tokens: 64000
-  extra_body:
-    dashscope_extend_params:
-      provider: b
+  # extra_body:
+  #   dashscope_extend_params:
+  #     provider: b
 
 prompt:
   system: |
@@ -69,9 +69,9 @@ prompt:
     Now begin:
 
 text2image:
-  t2i_model: MusePublic/Qwen-image
-  t2i_api_key:
-  t2i_base_url: https://api-inference.modelscope.cn
+  t2i_model: google/nano-banana-pro/text-to-image-ultra
+  t2i_api_key: apikey-dd675b2a3fcb4f1aa88b91503d87f730
+  t2i_base_url: https://api.atlascloud.ai/api/v1/model/generateImage
   t2i_transition:
   t2i_style:
 
@@ -91,24 +91,22 @@ use_doc_image: true
 
 use_subtitle: false
 
-use_text2video: true
+use_text2video: false
 
 text2video:
-  t2v_model: sora-2-2025-10-06
-  t2v_api_key:
-  # '720x1280', '1280x720', '1024x1792', '1792x1024'
-  t2v_size: 1280x720
-  t2v_seconds: [4, 8, 12]
+  t2v_model: openai/sora-2/text-to-video-pro  # 使用你API中的模型名称
+  t2v_api_key: apikey-dd675b2a3fcb4f1aa88b91503d87f730            # 你的AtlasCloud API Key
+  t2v_size: 720*1280                                   # 根据你的API格式调整
+  t2v_seconds: [4, 8, 10, 12]                          # 可用的时长选项
   t2v_provider:
-    base_url: https://dashscope.aliyuncs.com
-    create_endpoint: /api/v1/services/aigc/model-evaluation/async-inference/
-    poll_endpoint: /api/v1/tasks/{task_id}
-    async_header: X-DashScope-Async
-    task_id_path: [output, task_id]  # JSON path to extract task_id
-    status_path: [output, task_status]  # JSON path to extract status
-    video_url_path: [output, video_url]  # JSON path to extract video URL
-    success_status: [SUCCEEDED, SUCCEED]
-    failed_status: [FAILED, failed]
+    base_url: https://api.atlascloud.ai
+    create_endpoint: /api/v1/model/generateVideo       # 生成视频的端点
+    poll_endpoint: /api/v1/model/prediction/{task_id}  # 轮询状态的端点
+    task_id_path: [data, id]                            # 从响应中提取task_id的路径
+    status_path: [data, status]                         # 状态字段路径
+    video_url_path: [data, outputs, 0]                  # 视频URL路径
+    success_status: [completed, succeeded]              # 成功状态
+    failed_status: [failed]                             # 失败状态
 
 subtitle_translate:
 

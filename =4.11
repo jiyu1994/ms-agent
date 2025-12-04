@@ -1,0 +1,17 @@
+Requirement already satisfied: yarl in /Users/yu/anaconda3/envs/ms-agent/lib/python3.12/site-packages (1.22.0)
+Collecting aiohappyeyeballs
+  Using cached aiohappyeyeballs-2.6.1-py3-none-any.whl.metadata (5.9 kB)
+Collecting aiosignal
+  Using cached aiosignal-1.4.0-py3-none-any.whl.metadata (3.7 kB)
+Collecting frozenlist
+  Using cached frozenlist-1.8.0-cp312-cp312-macosx_10_13_x86_64.whl.metadata (20 kB)
+Requirement already satisfied: typing-extensions in /Users/yu/anaconda3/envs/ms-agent/lib/python3.12/site-packages (4.7.1)
+Requirement already satisfied: idna>=2.0 in /Users/yu/anaconda3/envs/ms-agent/lib/python3.12/site-packages (from yarl) (3.11)
+Requirement already satisfied: multidict>=4.0 in /Users/yu/anaconda3/envs/ms-agent/lib/python3.12/site-packages (from yarl) (6.7.0)
+Requirement already satisfied: propcache>=0.2.1 in /Users/yu/anaconda3/envs/ms-agent/lib/python3.12/site-packages (from yarl) (0.4.1)
+Using cached aiohappyeyeballs-2.6.1-py3-none-any.whl (15 kB)
+Using cached aiosignal-1.4.0-py3-none-any.whl (7.5 kB)
+Downloading frozenlist-1.8.0-cp312-cp312-macosx_10_13_x86_64.whl (50 kB)
+Installing collected packages: frozenlist, aiohappyeyeballs, aiosignal
+
+Successfully installed aiohappyeyeballs-2.6.1 aiosignal-1.4.0 frozenlist-1.8.0

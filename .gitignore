@@ -159,3 +159,100 @@ neo4j.lock
 
 **/temp_workspace/
 ms_agent/app/temp_workspace/
+
+# ================================
+# Singularity Cinema Project Specific
+# ================================
+
+# Generated video outputs (keep final results, ignore temp files)
+output_video/videos/ai_video_*.mp4
+output_video/videos/video_*.mp4
+output_video/*final*.mp4
+output_video/fixed_*.mp4
+output_video/hybrid_*.mp4
+output_video/test_*.mp4
+
+# Audio files (generated content)
+output_video/audio/segment_*.mp3
+output_video/audio_info.txt
+
+# Image files (generated content)
+output_video/images/illustration_*.png
+output_video/image_info.txt
+
+# Manim generated content
+output_video/manim_render/*/
+output_video/manim_test/
+output_video/code_fix/
+
+# Background and other generated assets
+output_video/background.png
+
+# Script and segment files (these are outputs, not source)
+output_video/script.txt
+output_video/segments.txt
+output_video/docs.txt
+output_video/title.txt
+output_video/topic.txt
+
+# Subtitle and prompt outputs
+output_video/subtitles/
+output_video/video_prompts/
+output_video/illustration_prompts/
+
+# Memory and cache files
+output_video/memory/
+
+# Temporary processing files
+output_video/*concat*.txt
+output_video/temp_*
+output_video/hybrid_segment*.mp4
+
+# Generated Python files in manim_code (these are outputs)
+output_video/manim_code/segment_*.py
+
+# Status and report files (temporary)
+PROJECT_STATUS_REPORT.md
+API_LIMITING_SOLUTION_REPORT.md
+CODE_ORGANIZATION_SUMMARY.md
+
+# Original broken video files
+output_video/final_video.mp4
+
+# Backup and original tool files that were moved
+output_video/create_*.py
+output_video/create_*.sh
+output_video/fix_*.sh
+
+# FFmpeg/Video processing temporary files
+*.tmp
+*.temp
+*_temp.*
+partial_movie_files/
+uncached_*.mov
+partial_movie_file_list.txt
+
+# Manim specific ignores
+*.svg
+Scene*.py
+Scene*.mov
+texts/
+images/Scene*/
+videos/Scene*/
+
+# Keep important source files and configs
+!projects/singularity_cinema/agent.yaml
+!projects/singularity_cinema/workflow.yaml
+!projects/singularity_cinema/requirements.txt
+!projects/singularity_cinema/step*/agent.py
+!projects/singularity_cinema/step*/tools/*.py
+!projects/singularity_cinema/step*/tools/*.sh
+!projects/singularity_cinema/step*/tools/README.md
+!projects/singularity_cinema/*.md
+
+# Ignore ALL media/resource files (no exceptions)
+projects/singularity_cinema/bg_audio.mp3
+projects/singularity_cinema/author.txt
+
+# Ignore final results and outputs completely
+output_video/

@@ -162,12 +162,9 @@ class GenerateVideo(CodeAgent):
     def _build_request_payload(provider_config, model, prompt, size, seconds):
         return {
             'model': model,
-            'input': {
-                'prompt': prompt,
-                'size': size,
-                'seconds': seconds,
-            },
-            'parameters': {}
+            'duration': seconds,  # 使用 duration 而不是 seconds
+            'prompt': prompt,
+            'size': size
         }
 
     @staticmethod
@@ -182,10 +179,10 @@ class GenerateVideo(CodeAgent):
             'Content-Type': 'application/json',
         }
 
-        # Add async header if configured
-        if hasattr(provider_config,
-                   'async_header') and provider_config.async_header:
-            headers[provider_config.async_header] = 'enable'
+        # Add async header if configured (FIXED: avoid overriding Authorization header)
+        # if hasattr(provider_config,
+        #            'async_header') and provider_config.async_header:
+        #     headers[provider_config.async_header] = 'enable'
 
         payload = GenerateVideo._build_request_payload(provider_config, model,
                                                        prompt, size, seconds)
